@@ -42,7 +42,12 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '400',
         color: defaultColor
-    }
+    },
+    formLabel: {
+        fontSize: 12,
+        fontWeight: '400',
+        color: defaultColor
+    },
 })
 
 export default styles

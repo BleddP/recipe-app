@@ -11,7 +11,7 @@ const HomeScreen = () => {
     const navigation = useNavigation<any>()
 
     const openModal = () => {
-        navigation.navigate("BasicModal")
+        navigation.navigate("NewDish")
     }
 
     return (
@@ -19,7 +19,7 @@ const HomeScreen = () => {
             <Header title="I am the header" />
             <Container>
                 <H1>Home screen</H1>
-                <Button title='Open modal' onPress={openModal} />
+                <Button title='Add new dish' onPress={openModal} />
             </Container>
         </View>
     )
