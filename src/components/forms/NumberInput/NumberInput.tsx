@@ -1,4 +1,4 @@
-import { SafeAreaView, View, TextInput as Input } from "react-native";
+import { View, TextInput as Input } from "react-native";
 
 // Components
 import FormLabel from "../../typography/FormLabel";
@@ -7,33 +7,34 @@ import FormLabel from "../../typography/FormLabel";
 import styles from './styles'
 
 interface Props {
-    id: number | string,
-    value: string,
-    onChange: (id: number | string, newValue: string) => void,
+    id: string | number,
+    value: number,
+    onChange: (id: number | string, newValue: number) => void,
     placeholder?: string,
     label?: number | string,
     style?: object
 }
 
-const TextInput: React.FC<Props> = ({ id, value, onChange, placeholder, label, style }) => {
+const NumberInput: React.FC<Props> = ({ id, value, onChange, placeholder, label, style }) => {
 
     const handleChange = (newValue: string) => {
-        onChange(id, newValue)
+        onChange(id, parseInt(newValue))
     }
 
     return (
         <View>
             <FormLabel>{label}</FormLabel>
-            <SafeAreaView style={styles.wrapper}>
+            <View style={styles.wrapper}>
                 <Input
+                    keyboardType="numeric"
                     style={{ ...styles.input, ...style }}
-                    value={value}
+                    value={value.toString()}
                     onChangeText={handleChange}
                     placeholder={placeholder}
                 />
-            </SafeAreaView>
+            </View>
         </View>
     )
 }
 
-export default TextInput
+export default NumberInput

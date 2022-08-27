@@ -7,7 +7,8 @@ import Span from '../../../typography/Span'
 
 // Components
 import Button from '../../Button'
-import TextInput from '../../../forms/TextInput/TextInput'
+import TextInput from '../../../forms/TextInput'
+import NumberInput from '../../../forms/NumberInput'
 
 // Styles
 import styles from './styles'
@@ -22,14 +23,15 @@ interface Props {
 const Ingredient = ({ item = null, onAdd, onRemove, onUpdate }) => {
 
     // State
-    const [edit, setEdit] = useState(true)
-    const [input, setInput] = useState({
+    const defaultValues = {
         name: '',
-        amount: "0",
+        amount: 0,
         unit: 'g',
-        calories: "0",
+        calories: 0,
         id: ''
-    })
+    }
+    const [edit, setEdit] = useState(true)
+    const [input, setInput] = useState(defaultValues)
 
     // Reactive
     useEffect(() => {
@@ -48,6 +50,7 @@ const Ingredient = ({ item = null, onAdd, onRemove, onUpdate }) => {
     const addItem = () => {
         input.id = uuidv4()
         onAdd(input)
+        setInput(defaultValues)
     }
 
     const removeItem = () => {
@@ -62,18 +65,18 @@ const Ingredient = ({ item = null, onAdd, onRemove, onUpdate }) => {
         <View>
             {!edit && (
                 <View style={styles.row}>
-                    <Span>{input.name}</Span>
-                    <Span>{input.amount}</Span>
-                    <Span>{input.unit}</Span>
-                    <Span>{input.calories}cal</Span>
+                    <Span style={styles.name}>{input.name}</Span>
+                    <Span style={styles.amount}>{input.amount}</Span>
+                    <Span style={styles.unit}>{input.unit}</Span>
+                    <Span style={styles.cal}>{input.calories}cal</Span>
                 </View>
             )}
             {edit && (
                 <View style={styles.row}>
-                    <TextInput label="Name" id="name" value={input.name} onChange={handleInputChange} placeholder="Name" />
-                    <TextInput label="Amount" id="amount" value={input.amount} onChange={handleInputChange} />
-                    <TextInput id="unit" value={input.unit} onChange={handleInputChange} placeholder="Unit" />
-                    <TextInput label="cal / unit" id="calories" value={input.calories} onChange={handleInputChange} />
+                    <TextInput style={styles.name} label="Name" id="name" value={input.name} onChange={handleInputChange} placeholder="Name" />
+                    <NumberInput style={styles.amount} label="Amount" id="amount" value={input.amount} onChange={handleInputChange} />
+                    <TextInput style={styles.unit} id="unit" value={input.unit} onChange={handleInputChange} placeholder="Unit" />
+                    <NumberInput style={styles.cal} label="cal / unit" id="calories" value={input.calories} onChange={handleInputChange} />
                 </View>
             )
             }

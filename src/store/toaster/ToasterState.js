@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer } from "react-native";
 import { SHOW_TOASTER, CLOSE_TOASTER, CLEAR_CONTENT } from "./types";
 
 import ToasterReducer from "./toasterReducer";
