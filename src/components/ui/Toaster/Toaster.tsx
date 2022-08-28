@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext } from 'react'
+import { useRef, useEffect } from 'react'
 import { Animated, Easing, View } from 'react-native'
 
 // Components
@@ -6,13 +6,15 @@ import Container from '../../layout/Container'
 import H4 from '../../typography/H4'
 
 // Store
-import toasterContext from '../../../store/toaster/toasterContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { close } from '../../../store/toaster'
 
 // Styles
 import styles from './styles'
 
 const Toaster = () => {
-    const { open, content } = useContext(toasterContext)
+    const dispatch = useDispatch()
+    const { open, content } = useSelector((state: any) => state)
 
     // Animations
     const scrollY = useRef(new Animated.Value(48)).current;
@@ -31,6 +33,9 @@ const Toaster = () => {
                 easing: Easing.elastic(5),
                 useNativeDriver: true
             }).start()
+            setTimeout(() => {
+                dispatch(close())
+            }, 3000);
         } else {
             Animated.timing(opacity, {
                 toValue: 0,
@@ -55,7 +60,7 @@ const Toaster = () => {
             <Container>
                 <View style={styles.toaster}>
                     {typeof content === 'string' ? (
-                        <H4 style={styles.text} color="#FFF">{content}</H4>
+                        <H4 style={styles.text} color="#000">{content}</H4>
                     ) : (content)}
                 </View>
             </Container>

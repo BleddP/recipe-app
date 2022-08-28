@@ -16,13 +16,14 @@ import NewDish from './src/modals/NewDish';
 import Toaster from './src/components/ui/Toaster';
 
 // Store
-import ToasterState from './src/store/toaster/ToasterState';
+import { Provider } from 'react-redux'
+import { store } from './src/store/toaster'
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <ToasterState>
+    <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
@@ -32,7 +33,7 @@ function App() {
         </Stack.Navigator>
       </NavigationContainer>
       <Toaster />
-    </ToasterState>
+    </Provider>
   );
 }
 

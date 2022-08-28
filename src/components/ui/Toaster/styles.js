@@ -10,13 +10,12 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 0,
         borderRadius: 15,
-        ...boxShadow
-    },
-    background: {
         padding: 12,
+        ...boxShadow
     },
     text: {
         textAlign: 'center',
+        margin: 0
     }
 })
 
