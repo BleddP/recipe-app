@@ -2,35 +2,41 @@ import { useNavigation } from '@react-navigation/native';
 import { View } from "react-native"
 
 // Store
-import { useDispatch } from 'react-redux'
-import { show } from '../../store/toaster';
+import { useSelector } from 'react-redux'
 
 // Components
 import Header from "../../components/layout/Header"
 import Container from "../../components/layout/Container"
 import Button from '../../components//ui/Button'
+import Card from '../../components/ui/Card';
+
+// Typography
 import H1 from "../../components/typography/H1"
 
+// Interfaces
+import { Dish } from '../../interfaces';
 
 const HomeScreen = () => {
     const navigation = useNavigation<any>()
-    const dispatch = useDispatch()
+    const dishes = useSelector((state: any) => state.dishes)
 
     const openModal = () => {
         navigation.navigate("NewDish")
-    }
-
-    const showToaster = () => {
-        dispatch(show("I am a delicious piece of toast"))
     }
 
     return (
         <View>
             <Header title="I am the header" />
             <Container>
-                <H1>Home screen</H1>
+                <H1>Bon appetit</H1>
                 <Button title='Add new dish' onPress={openModal} />
-                <Button title="Show" onPress={showToaster} />
+                {dishes.map((dish: Dish) => {
+                    return (
+                        <View key={dish.id}>
+                            <H1>{dish.name}</H1>
+                        </View>
+                    )
+                })}
             </Container>
         </View>
     )

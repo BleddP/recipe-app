@@ -17,7 +17,7 @@ import Toaster from './src/components/ui/Toaster';
 
 // Store
 import { Provider } from 'react-redux'
-import { store } from './src/store/toaster'
+import store from './src/store'
 
 const Stack = createNativeStackNavigator();
 

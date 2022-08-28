@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { v4 as uuidv4 } from 'uuid';
+
+// Store
+import { useDispatch, useSelector } from 'react-redux'
+import { addNewDish } from '../../store/dishes';
 
 // Components
 import Container from '../../components/layout/Container';
@@ -11,6 +16,7 @@ import H1 from '../../components/typography/H1';
 
 const NewDish = () => {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
 
     // State
     const [name, setName] = useState('')
@@ -30,6 +36,16 @@ const NewDish = () => {
         console.log(item)
     }
 
+    const saveDish = () => {
+        dispatch(addNewDish({
+            id: uuidv4(),
+            name: "New dish name",
+            ingredients,
+            instructions
+        }))
+        navigation.goBack()
+    }
+
     return (
         <Container style={{ flex: 1 }}>
             <H1>{name || 'New dish'}</H1>
@@ -38,6 +54,7 @@ const NewDish = () => {
             })}
             <Ingredient onAdd={onAdd} onUpdate={onUpdate} onRemove={onRemove} />
             <Instructions />
+            <Button onPress={saveDish} title="Save dish" />
             <Button onPress={() => navigation.goBack()} title="Dismiss" />
         </Container>
     );

@@ -1,11 +1,11 @@
-import { createSlice, configureStore } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState =  {
     open: false,
     content: null,
 }
 
-const toasterSlice = createSlice({
+export const toaster = createSlice({
   name: 'toaster',
   initialState,
   reducers: {
@@ -22,9 +22,4 @@ const toasterSlice = createSlice({
   }
 })
 
-
-export const { show, close, clearContent } = toasterSlice.actions
-
-export const store = configureStore({
-  reducer: toasterSlice.reducer
-})
+export const { show, close, clearContent } = toaster.actions
