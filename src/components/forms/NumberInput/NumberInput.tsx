@@ -1,4 +1,5 @@
-import { View, TextInput as Input } from "react-native";
+import { View } from "react-native";
+import { TextInput as Input } from 'react-native-paper';
 
 // Components
 import FormLabel from "../../typography/FormLabel";
@@ -23,16 +24,15 @@ const NumberInput: React.FC<Props> = ({ id, value, onChange, placeholder, label,
 
     return (
         <View>
-            <FormLabel>{label}</FormLabel>
-            <View style={styles.wrapper}>
-                <Input
-                    keyboardType="numeric"
-                    style={{ ...styles.input, ...style }}
-                    value={value.toString()}
-                    onChangeText={handleChange}
-                    placeholder={placeholder}
-                />
-            </View>
+            <Input
+                mode='outlined'
+                label={label?.toString() || ''}
+                keyboardType="numeric"
+                style={{ ...style }}
+                value={value.toString()}
+                onChangeText={handleChange}
+                placeholder={placeholder}
+            />
         </View>
     )
 }

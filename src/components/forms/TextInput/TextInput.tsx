@@ -1,7 +1,5 @@
-import { SafeAreaView, View, TextInput as Input } from "react-native";
-
-// Components
-import FormLabel from "../../typography/FormLabel";
+import { SafeAreaView, View } from "react-native";
+import { TextInput as Input } from 'react-native-paper';
 
 // Styles
 import styles from './styles'
@@ -23,13 +21,13 @@ const TextInput: React.FC<Props> = ({ id, value, onChange, placeholder, label, s
 
     return (
         <View>
-            <FormLabel>{label}</FormLabel>
-            <SafeAreaView style={styles.wrapper}>
+            <SafeAreaView>
                 <Input
-                    style={{ ...styles.input, ...style }}
+                    mode='outlined'
+                    label={label?.toString() || ''}
+                    style={{ ...style }}
                     value={value}
                     onChangeText={handleChange}
-                    placeholder={placeholder}
                 />
             </SafeAreaView>
         </View>
